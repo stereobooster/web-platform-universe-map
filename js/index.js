@@ -44,7 +44,7 @@ var g = svg.append("g");
 svg.style("cursor", "move");
 
 // Define the div for the tooltip
-var div = d3.select("body")
+var tooltip = d3.select("body")
   .append("div")
   .attr("class", "tooltip")
   .style("opacity", 0)
@@ -52,20 +52,21 @@ var div = d3.select("body")
 d3.json("graph.json", function(error, graph) {
 
   var linkedByIndex = {};
-  var edges = graph.links.map(function(e) {
+  var edges = graph.links.map(function(link) {
     var sourceNode = graph.nodes.filter(function(n) {
-      return n.id === e.source;
+      return n.id === link.source;
     })[0];
 
     var targetNode = graph.nodes.filter(function(n) {
-      return n.id === e.target;
+      return n.id === link.target;
     })[0];
 
     linkedByIndex[sourceNode.id + "," + targetNode.id] = true;
 
     return {
       source: sourceNode,
-      target: targetNode
+      target: targetNode,
+      type: link.type
     }
   });
 
@@ -82,7 +83,7 @@ d3.json("graph.json", function(error, graph) {
     .data(edges)
     .enter()
     .append("line")
-    .attr("class", "link")
+    .attr("class", function(d) { return "link " + (d.type || "") })
     .style("stroke-width", nominal_stroke)
     .style("stroke", default_link_color)
 
@@ -156,18 +157,18 @@ d3.json("graph.json", function(error, graph) {
 
   node.on("mouseover", function(d) {
     set_highlight(d);
-    // div.transition()
-    //   .duration(200)
-    //   .style("opacity", .9);
-    // div.html(d.name || d.id)
-    //   .style("left", (d3.event.pageX) + "px")
-    //   .style("top", (d3.event.pageY - 28) + "px");
+    tooltip.transition()
+      .duration(200)
+      .style("opacity", .9);
+    tooltip.html(d.name || d.id)
+      .style("left", (d3.event.pageX) + "px")
+      .style("top", (d3.event.pageY - 28) + "px");
   })
   .on("mouseout", function(d) {
     exit_highlight();
-    // div.transition()
-    //   .duration(500)
-    //   .style("opacity", 0);
+    tooltip.transition()
+      .duration(500)
+      .style("opacity", 0);
   })
   .on("mousedown", function(d) {
     d3.event.stopPropagation();

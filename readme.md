@@ -10,11 +10,12 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 
 ## TODO
 
+- Add deprication flags to nodes
+- Add descriptions to nodes
 - Started doing this project with Jekyll, because thought it was requirement for github pages. Later remembered that github pages can serve static files. Switch to Gulp and html5poilerplate (I guess).
 
 ## Other resources
 
-- https://letsencrypt.org/
 - http://www.evolutionoftheweb.com/
 - https://github.com/pazguille/offline-first
 - https://www.smashingmagazine.com/2016/03/houdini-maybe-the-most-exciting-development-in-css-youve-never-heard-of/
