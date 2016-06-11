@@ -14,6 +14,11 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 - Add descriptions to nodes
 - Started doing this project with Jekyll, because thought it was requirement for github pages. Later remembered that github pages can serve static files. Switch to Gulp and html5poilerplate (I guess).
 
+## D3
+
+- http://www.coppelia.io/2014/07/an-a-to-z-of-extra-features-for-the-d3-force-layout/
+- https://leanpub.com/D3-Tips-and-Tricks/read
+
 ## Other resources
 
 - http://www.evolutionoftheweb.com/

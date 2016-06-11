@@ -38,7 +38,9 @@ var max_base_node_size = 36;
 var min_zoom = 0.1;
 var max_zoom = 7;
 var svg = d3.select("body").append("svg");
-var zoom = d3.behavior.zoom().scaleExtent([min_zoom, max_zoom])
+var zoom = d3.behavior.
+  zoom().
+  scaleExtent([min_zoom, max_zoom])
 var g = svg.append("g");
 
 svg.style("cursor", "move");
@@ -77,6 +79,11 @@ d3.json("graph.json", function(error, graph) {
   force
     .nodes(graph.nodes)
     .links(edges)
+    .gravity(0.05)
+    .charge(-1500)
+    .linkDistance(50)
+    .friction(0.5)
+    .linkStrength(function(l, i) { return l.type == "relative" ? 0.1 : 1; })
     .start();
 
   var link = g.selectAll(".link")
@@ -117,20 +124,6 @@ d3.json("graph.json", function(error, graph) {
     .style("fill", function (d) {
       return d.img ? "#fff" : "#eee";
     })
-
-  // .append("path")
-  // .attr("d",
-  //   d3.svg.symbol()
-  //     .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
-  //     .type(function(d) { return d.type; })
-  // )
-  // .style(tocolor, function(d) {
-  //   if (isNumber(d.score) && d.score>=0) return color(d.score);
-  //   else return default_node_color;
-  // })
-  // //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
-  // .style("stroke-width", nominal_stroke)
-  // .style(towhite, "white");
 
   node.append("image")
     .attr("href",  function(d) { if (d.img) { return baseUrl + "/assets/" + d.img; } })
@@ -234,32 +227,32 @@ d3.json("graph.json", function(error, graph) {
     }
   }
 
-  // zoom.on("zoom", function() {
-  //   var stroke = nominal_stroke;
-  //   if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
-  //   link.style("stroke-width",stroke);
-  //   circle.style("stroke-width",stroke);
+  zoom.on("zoom", function() {
+    // var stroke = nominal_stroke;
+    // if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+    // link.style("stroke-width",stroke);
+    // circle.style("stroke-width",stroke);
 
-  //   var base_radius = nominal_base_node_size;
-  //     if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
-  //         circle.attr("d", d3.svg.symbol()
-  //         .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
-  //         .type(function(d) { return d.type; }))
+    // var base_radius = nominal_base_node_size;
+    //   if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+    //       circle.attr("d", d3.svg.symbol()
+    //       .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+    //       .type(function(d) { return d.type; }))
 
-  //   //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
-  //   if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+    // //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+    // if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
 
-  //   var text_size = nominal_text_size;
-  //     if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
-  //     text.style("font-size",text_size + "px");
+    // var text_size = nominal_text_size;
+    // if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+    // text.style("font-size",text_size + "px");
 
-  //   g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  // });
+    // " + d3.event.scale + "
+    g.attr("transform", "translate(" + d3.event.translate + ")scale(1)");
+  });
 
   svg.call(zoom);
   resize();
-  d3.select(window).on("resize", resize)
-;
+  d3.select(window).on("resize", resize);
 
   force.on("tick", function() {
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
@@ -272,6 +265,8 @@ d3.json("graph.json", function(error, graph) {
 
     node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
+
+    // node.each(collide);
   });
 
   function resize() {
@@ -285,6 +280,30 @@ d3.json("graph.json", function(error, graph) {
     h = height;
   }
 });
+
+// function collide(node) {
+//   var r = node.radius + 16,
+//       nx1 = node.x - r,
+//       nx2 = node.x + r,
+//       ny1 = node.y - r,
+//       ny2 = node.y + r;
+//   return function(quad, x1, y1, x2, y2) {
+//     if (quad.point && (quad.point !== node)) {
+//       var x = node.x - quad.point.x,
+//           y = node.y - quad.point.y,
+//           l = Math.sqrt(x * x + y * y),
+//           r = node.radius + quad.point.radius;
+//       if (l < r) {
+//         l = (l - r) / l * .5;
+//         node.x -= x *= l;
+//         node.y -= y *= l;
+//         quad.point.x += x;
+//         quad.point.y += y;
+//       }
+//     }
+//     return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+//   };
+// }
 
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
