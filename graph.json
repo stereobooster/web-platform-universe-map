@@ -17,7 +17,7 @@
     {"id": "webplatform", "img": "webplatform.png", "href": "https://www.webplatform.org/"},
     {"id": "amp", "img": "amp.svg", "href": "https://www.ampproject.org/"},
     {"id": "progressive-web-apps", "href": "https://developers.google.com/web/progressive-web-apps/"},
-    {"id": "html5", "href": "https://www.w3.org/html/logo/", "img": "html5_badge.svg"},
+    {"id": "html5", "href": "https://www.w3.org/html/logo/", "img": "html5.svg"},
     {"id": "webcomponents", "href": "http://webcomponents.org/", "img": "webcomponents.svg"},
     {"id": "houdini", "href": "https://github.com/w3c/css-houdini-drafts/wiki", "img": "houdini.jpg"},
     {"id": "asmjs", "href": "http://asmjs.org/"},
