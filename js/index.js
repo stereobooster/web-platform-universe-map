@@ -132,7 +132,7 @@ d3.json("graph.json", function(error, graph) {
   // .style(towhite, "white");
 
   node.append("image")
-    .attr("href",  function(d) { if (d.img) { return "/assets/" + d.img; } })
+    .attr("href",  function(d) { if (d.img) { return baseUrl + "/assets/" + d.img; } })
     .attr("x", function(d) { return -25;})
     .attr("y", function(d) { return -25;})
     .attr("height", 50)

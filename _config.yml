@@ -9,7 +9,7 @@
 title: Web Platform Universe Map
 description: > # this means to ignore newlines until "baseurl:"
   Web platform - collection of technologies powering modern web. Purpose of this project is to map all existing standards and initiatives
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: '/web-platform-universe-map'
 # url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: stereobooster
 github_username:  stereobooster
