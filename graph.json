@@ -1,0 +1,30 @@
+{
+  "graph": [],
+  "links": [
+    {"source": "extensible-web", "target": "extensible-html"},
+    {"source": "extensible-web", "target": "extensible-js"},
+    {"source": "extensible-web", "target": "extensible-css"},
+    {"source": "extensible-css", "target": "houdini"},
+    {"source": "extensible-js", "target": "asmjs"},
+    {"source": "extensible-html", "target": "webcomponents"},
+    {"source": "amp", "target": "webcomponents"}
+  ],
+  "nodes": [
+    {"id": "extensible-web", "href": "https://extensiblewebmanifesto.org/"},
+    {"id": "extensible-html", "name": "html" },
+    {"id": "extensible-js", "name": "js", "img": "js.svg" },
+    {"id": "extensible-css", "name": "css" },
+    {"id": "webplatform", "img": "webplatform.png", "href": "https://www.webplatform.org/"},
+    {"id": "amp", "img": "amp.svg", "href": "https://www.ampproject.org/"},
+    {"id": "progressive-web-apps", "href": "https://developers.google.com/web/progressive-web-apps/"},
+    {"id": "html5", "href": "https://www.w3.org/html/logo/", "img": "html5_badge.svg"},
+    {"id": "webcomponents", "href": "http://webcomponents.org/", "img": "webcomponents.svg"},
+    {"id": "houdini", "href": "https://github.com/w3c/css-houdini-drafts/wiki", "img": "houdini.jpg"},
+    {"id": "asmjs", "href": "http://asmjs.org/"},
+    {"id": "isomorphic", "href": "http://isomorphic.net/"},
+    {"id": "redux", "href": "http://redux.js.org/docs/introduction/threeprinciples.html"},
+    {"id": "offlinefirst", "href": "http://offlinefirst.org/"}
+  ],
+  "directed": false,
+  "multigraph": false
+}

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/stereobooster/web-platform-universe-map#readme",
   "dependencies": {
-    "d3": "^3.5.17"
+    "d3": "^3.5.17",
+    "normalize.css": "^4.1.1"
   }
 }

@@ -17,5 +17,16 @@ github_username:  stereobooster
 # Build settings
 markdown: kramdown
 
+sass:
+  sass_dir: _sass
+  style: :compressed
+
+exclude:
+  - 'node_modules'
+  - 'bin'
+  - 'Gemfile'
+  - 'Gemfile.lock'
+  - 'README.md'
+
 gems:
   - jekyll-seo-tag
