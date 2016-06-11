@@ -1,0 +1,22 @@
+{
+  "name": "web-platform-universe-map",
+  "version": "1.0.0",
+  "description": "Web platform - collection of technologies powering modern web. The problem is that there is no single standard or opinion on what it is. There are a lot of committees, working groups and organisation. There are a lot technologies. There are a lot of aspects and opinions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stereobooster/web-platform-universe-map.git"
+  },
+  "author": "",
+  "license": "CC0 1.0 Universal",
+  "bugs": {
+    "url": "https://github.com/stereobooster/web-platform-universe-map/issues"
+  },
+  "homepage": "https://github.com/stereobooster/web-platform-universe-map#readme",
+  "dependencies": {
+    "d3": "^3.5.17"
+  }
+}
