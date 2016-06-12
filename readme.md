@@ -10,6 +10,8 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 
 ## TODO
 
+- Add clusterization and collision detection
+- Add about project section
 - Use YAML and Markdown for graph data
 - Move all SVG styles to sass
 - Add animation to bring selected node to center
@@ -21,11 +23,28 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 - Add standardjs
 - Add social tags (title, description, image), github badge, add share buttons
 - Add about project section
-- Add clusterization and collision detection
 - Test on mobile/touchscreen devices
 - Node types: idea, standard, library (polyfill)
 - Started doing this project with Jekyll, because thought it was requirement for github pages. Later remembered that github pages can serve static files. Switch to Gulp and html5poilerplate (I guess).
 - prerender D3 on server?
+
+## Inspiration
+
+### "Maps"
+
+- http://ny.eater.com/maps/best-cafe-coffee-shop-new-york-city-brooklyn-queens
+- http://www.whodotheyserve.com/#map/gylNwpQO-l
+- http://vowl.visualdataweb.org/webvowl/
+- https://risacher.org/galaxy-chart/
+- http://helenjacksonanalytic.co.uk/UKEconomyNetwork.html
+- https://www.pinterest.com/search/pins/?q=map&rs=typed&0=map%7Ctyped
+
+### Packing/clustering
+
+- http://bl.ocks.org/donaldh/2920551
+- http://mbostock.github.io/d3/talk/20111116/pack-hierarchy.html
+- http://bl.ocks.org/mbostock/4063269
+- http://bl.ocks.org/mbostock/4063530
 
 ## D3
 
