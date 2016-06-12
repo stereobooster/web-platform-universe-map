@@ -2,24 +2,15 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 @charset "utf-8";
-
 @import "syntax-highlighting";
 @import "foundation";
 
-.tooltip {
-    position: absolute;
-    text-align: center;
-    width: 60px;
-    height: 28px;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;
+// map
+.map {
+  background: $light-gray;
+  padding: 0;
 }
 
-// SVG
 .link.relative {
   stroke-dasharray: 0,2 1;
 }

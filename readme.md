@@ -10,11 +10,11 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 
 ## TODO
 
+- Use YAML and Markdown for graph data
+- Move all SVG styles to sass
 - Add animation to bring selected node to center
 - Save selected node via anchor in url
-- Open legend on node selection
 - Add deprication flags to nodes
-- Add descriptions to nodes
 - Add status link (like caniuse)
 - Add other links
 - Add search

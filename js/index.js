@@ -18,9 +18,12 @@ var size = d3.scale.pow().exponent(1)
   .range([8,24]);
 
 var force = d3.layout.force()
-  .linkDistance(60)
-  .charge(-300)
-  .size([w,h]);
+  .charge(-1500)
+  .linkDistance(100)
+  .size([w,h])
+  // .friction(0.5)
+  // .gravity(0.05)
+
 
 var default_node_color = "#ccc";
 var default_link_color = "#888";
@@ -33,7 +36,7 @@ var max_base_node_size = 36;
 
 var min_zoom = 0.1;
 var max_zoom = 7;
-var svg = d3.select("body").append("svg");
+var svg = d3.select("#map").append("svg");
 var zoom = d3.behavior.
   zoom().
   scaleExtent([min_zoom, max_zoom])
@@ -42,10 +45,7 @@ var g = svg.append("g");
 svg.style("cursor", "move");
 
 // Define the div for the tooltip
-var tooltip = d3.select("body")
-  .append("div")
-  .attr("class", "tooltip")
-  .style("opacity", 0)
+var legend = d3.select("#legend")
 
 d3.json("graph.json", function(error, graph) {
 
@@ -75,11 +75,7 @@ d3.json("graph.json", function(error, graph) {
   force
     .nodes(graph.nodes)
     .links(edges)
-    .gravity(0.05)
-    .charge(-1500)
-    .linkDistance(50)
-    .friction(0.5)
-    .linkStrength(function(l, i) { return l.type == "relative" ? 0.1 : 1; })
+    .linkStrength(function(l, i) { return l.type == "relative" ? 0.35 : 1; })
     .start();
 
   var link = g.selectAll(".link")
@@ -93,9 +89,6 @@ d3.json("graph.json", function(error, graph) {
   var node = g.selectAll(".node")
     .data(graph.nodes)
     .enter()
-    .append("a")
-    .attr("rel", "noopener")
-    .attr("href", function(d) { return d.href; })
     .append("g")
     .attr("class", "node")
     // .call(force.drag)
@@ -109,23 +102,19 @@ d3.json("graph.json", function(error, graph) {
 
   var circle = node
     .append("circle")
-    .attr("r", 25)
-    .style("fill", function (d) {
-      return d.img ? "#fff" : "#eee";
-    })
+    .attr("r", 30)
+    .style("fill", "#fff")
 
   node.append("image")
     .attr("href",  function(d) { if (d.img) { return baseUrl + "/assets/" + d.img; } })
-    .attr("x", function(d) { return -25;})
-    .attr("y", function(d) { return -25;})
-    .attr("height", 50)
-    .attr("width", 50);
+    .attr("x", function(d) { return -20;})
+    .attr("y", function(d) { return -20;})
+    .attr("height", 40)
+    .attr("width", 40);
 
   var text = g.selectAll(".text")
     .data(graph.nodes)
     .enter()
-    .append("a")
-    .attr("href", function(d) { return d.href; })
     .append("text")
     .attr("dy", ".35em")
     .style("font-size", nominal_text_size + "px")
@@ -139,20 +128,19 @@ d3.json("graph.json", function(error, graph) {
 
   node.on("mouseover", function(d) {
     set_highlight(d);
-    tooltip.transition()
-      .duration(200)
-      .style("opacity", .9);
-    tooltip.html(d.name || d.id)
-      .style("left", (d3.event.pageX) + "px")
-      .style("top", (d3.event.pageY - 28) + "px");
+
   })
   .on("mouseout", function(d) {
     exit_highlight();
-    tooltip.transition()
-      .duration(500)
-      .style("opacity", 0);
   })
   .on("mousedown", function(d) {
+    var link = '';
+    if (d.href) { link = '<p><a href="' + d.href + '">' + d.href + '</a></p>' }
+
+    var html = '<h2>' + (d.name || d.id) + '</h2>'
+      + link
+      + (d.description || '');
+    legend.html(html);
     d3.event.stopPropagation();
     focus_node = d;
     set_focus(d)
@@ -216,7 +204,7 @@ d3.json("graph.json", function(error, graph) {
 
   svg.call(zoom);
   resize();
-  d3.select(window).on("resize", resize);
+  // d3.select(window).on("resize", resize);
 
   force.on("tick", function() {
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
