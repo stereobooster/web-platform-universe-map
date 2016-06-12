@@ -84,7 +84,7 @@
     {"id": "rdf", "href": "https://www.w3.org/RDF/"},
     {"id": "rdfa", "href": "https://rdfa.info/"},
     {"id": "microdata", "href": "https://www.w3.org/TR/microdata/"},
-    {"id": "polymer", "href": "https://www.polymer-project.org/1.0/"},
+    {"id": "polymer", "href": "https://www.polymer-project.org/1.0/", "img": "polymer.png"},
     {"id": "html5-platform", "href": "https://platform.html5.org/"},
     {"id": "desktop"},
     {"id": "PWAify", "href": "https://github.com/vladikoff/PWAify"},

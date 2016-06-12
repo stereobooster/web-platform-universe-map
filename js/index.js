@@ -10,10 +10,6 @@ var outline = false;
 var min_score = 0;
 var max_score = 1;
 
-var color = d3.scale.linear()
-  .domain([min_score, (min_score+max_score)/2, max_score])
-  .range(["lime", "yellow", "red"]);
-
 var highlight_color = "blue";
 var highlight_trans = 0.1;
 
@@ -102,7 +98,7 @@ d3.json("graph.json", function(error, graph) {
     .attr("href", function(d) { return d.href; })
     .append("g")
     .attr("class", "node")
-    .call(force.drag)
+    // .call(force.drag)
 
   // node.on("dblclick.zoom", function(d) { d3.event.stopPropagation();
   //   var dcx = (window.innerWidth/2-d.x*zoom.scale());
@@ -110,13 +106,6 @@ d3.json("graph.json", function(error, graph) {
   //   zoom.translate([dcx,dcy]);
   //   g.attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
   // });
-
-  var tocolor = "fill";
-  var towhite = "stroke";
-  if (outline) {
-    tocolor = "stroke"
-    towhite = "fill"
-  }
 
   var circle = node
     .append("circle")
@@ -186,12 +175,8 @@ d3.json("graph.json", function(error, graph) {
     highlight_node = null;
     if (focus_node === null) {
       svg.style("cursor", "move");
-      if (highlight_color != "white") {
-        circle.style(towhite, "white");
-        text.style("font-weight", "normal");
-        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
-      }
-
+      circle.style("stroke", "white");
+      link.style("stroke", default_link_color);
     }
   }
 
@@ -217,36 +202,15 @@ d3.json("graph.json", function(error, graph) {
     highlight_node = d;
 
     if (highlight_color!="white") {
-      circle.style(towhite, function(o) {
+      circle.style("stroke", function(o) {
         return isConnected(d, o) ? highlight_color : "white";});
-      text.style("font-weight", function(o) {
-        return isConnected(d, o) ? "bold" : "normal";});
       link.style("stroke", function(o) {
-        return o.source.index == d.index || o.target.index == d.index ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+        return o.source.index == d.index || o.target.index == d.index ? highlight_color : default_link_color;
       });
     }
   }
 
   zoom.on("zoom", function() {
-    // var stroke = nominal_stroke;
-    // if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
-    // link.style("stroke-width",stroke);
-    // circle.style("stroke-width",stroke);
-
-    // var base_radius = nominal_base_node_size;
-    //   if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
-    //       circle.attr("d", d3.svg.symbol()
-    //       .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
-    //       .type(function(d) { return d.type; }))
-
-    // //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
-    // if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
-
-    // var text_size = nominal_text_size;
-    // if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
-    // text.style("font-size",text_size + "px");
-
-    // " + d3.event.scale + "
     g.attr("transform", "translate(" + d3.event.translate + ")scale(1)");
   });
 
@@ -265,8 +229,6 @@ d3.json("graph.json", function(error, graph) {
 
     node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
-
-    // node.each(collide);
   });
 
   function resize() {
@@ -280,31 +242,3 @@ d3.json("graph.json", function(error, graph) {
     h = height;
   }
 });
-
-// function collide(node) {
-//   var r = node.radius + 16,
-//       nx1 = node.x - r,
-//       nx2 = node.x + r,
-//       ny1 = node.y - r,
-//       ny2 = node.y + r;
-//   return function(quad, x1, y1, x2, y2) {
-//     if (quad.point && (quad.point !== node)) {
-//       var x = node.x - quad.point.x,
-//           y = node.y - quad.point.y,
-//           l = Math.sqrt(x * x + y * y),
-//           r = node.radius + quad.point.radius;
-//       if (l < r) {
-//         l = (l - r) / l * .5;
-//         node.x -= x *= l;
-//         node.y -= y *= l;
-//         quad.point.x += x;
-//         quad.point.y += y;
-//       }
-//     }
-//     return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-//   };
-// }
-
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}

@@ -10,8 +10,18 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 
 ## TODO
 
+- Add animation to bring selected node to center
+- Save selected node via anchor in url
+- Open legend on node selection
 - Add deprication flags to nodes
 - Add descriptions to nodes
+- Add status link (like caniuse)
+- Add other links
+- Add search
+- Add standardjs
+- Add social tags (title, description, image), github badge, add share buttons
+- Add about project section
+- Test on mobile/touchscreen devices
 - Started doing this project with Jekyll, because thought it was requirement for github pages. Later remembered that github pages can serve static files. Switch to Gulp and html5poilerplate (I guess).
 
 ## D3
