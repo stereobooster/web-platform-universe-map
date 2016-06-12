@@ -21,8 +21,11 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 - Add standardjs
 - Add social tags (title, description, image), github badge, add share buttons
 - Add about project section
+- Add clusterization and collision detection
 - Test on mobile/touchscreen devices
+- Node types: idea, standard, library (polyfill)
 - Started doing this project with Jekyll, because thought it was requirement for github pages. Later remembered that github pages can serve static files. Switch to Gulp and html5poilerplate (I guess).
+- prerender D3 on server?
 
 ## D3
 
