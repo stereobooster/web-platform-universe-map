@@ -32,6 +32,7 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 
 ### "Maps"
 
+- http://www.servicedesignresearch.com/uk/wp-content/uploads/2013/04/SDRUKMap01.pdf
 - http://ny.eater.com/maps/best-cafe-coffee-shop-new-york-city-brooklyn-queens
 - http://www.whodotheyserve.com/#map/gylNwpQO-l
 - http://vowl.visualdataweb.org/webvowl/
@@ -60,3 +61,4 @@ Purpose of this project is to map all existing standards, initiatives and ideas 
 - https://html5test.com/
 - http://www.html5rocks.com/en/
 - http://html5doctor.com/
+- https://davidwalsh.name/dont-wait-serviceworker-adding-offline-support-oneline
